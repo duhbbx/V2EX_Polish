@@ -50,12 +50,41 @@
               <i class="menu-item-icon" data-v2p-icon="archive-restore"></i>
               <span class="menu-item-title">配置备份与同步</span>
             </li>
+            <li data-menu-key="images" class="menu-item" title="图床设置">
+              <i class="menu-item-icon" data-v2p-icon="key"></i>
+              <span class="menu-item-title">图床设置</span>
+            </li>
           </ul>
         </div>
       </div>
 
       <div class="content-wrapper">
         <div class="content">
+          <div data-content-key="images">
+            <form id="image-host-form" class="token-form">
+              <h2 class="token-form-title">图床设置</h2>
+              <fieldset>
+                <div class="form-item">
+                  <label for="image-host-provider">上传到</label>
+                  <select id="image-host-provider" class="font-select">
+                    <option value="imgbb">ImgBB（推荐）</option>
+                    <option value="imgur">Imgur（原图床）</option>
+                  </select>
+                </div>
+                <div id="imgbb-key-field" class="form-item">
+                  <label for="imgbb-api-key">ImgBB API Key</label>
+                  <input id="imgbb-api-key" type="password" autocomplete="off" maxlength="256" spellcheck="false" placeholder="填写你自己的 ImgBB API Key" />
+                  <p><a class="link" href="https://api.imgbb.com/" target="_blank" rel="noopener noreferrer">前往 ImgBB 获取 API Key</a></p>
+                  <p>密钥仅保存在这台设备，不参与 Chrome 同步、配置导出或 V2EX 记事本备份。</p>
+                </div>
+                <p>支持选择、粘贴和拖放图片，单张最大 10 MB。图片上传到你选择的图床，不会自动切换其他图床。</p>
+                <p>发新主题时请选择 Markdown 格式，以显示其他图床的图片。评论区能否直接显示由 V2EX 决定。</p>
+                <button class="submit-btn" type="submit">保存图床设置</button>
+                <button id="image-host-clear-key" type="button">清除本机 API Key</button>
+                <p id="image-host-status" role="status" aria-live="polite"></p>
+              </fieldset>
+            </form>
+          </div>
           <div data-content-key="settings">
             <!-- <div class="backup-tip">
               「控制选项」和「用户标签」会自动通过远端进行备份和同步，无需担心重装插件会丢失数据。

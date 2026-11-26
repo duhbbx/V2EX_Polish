@@ -213,6 +213,9 @@ export async function setStorage<T extends StorageKey>(
       // fall through
 
     case StorageKey.API:
+      // fall through
+
+    case StorageKey.ImageUpload:
       try {
         await runtime.storage.set('local', { [storageKey]: storageItem })
 
@@ -221,6 +224,7 @@ export async function setStorage<T extends StorageKey>(
           runtime.isBrowserExtension
           && storageKey !== StorageKey.Daily
           && storageKey !== StorageKey.API
+          && storageKey !== StorageKey.ImageUpload
           && canAutoBackup()
         ) {
           scheduleBackup()

@@ -8,6 +8,7 @@ export const enum StorageKey {
   SyncInfo = 'settings-sync',
   Options = 'options',
   API = 'api',
+  ImageUpload = 'image-upload',
   Daily = 'daily',
   MemberTag = 'member-tag',
   ReadingList = 'reading-list',

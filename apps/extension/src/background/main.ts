@@ -10,6 +10,9 @@ import {
   normalizeCheckInState,
 } from './check-in-scheduler'
 import { checkIn, isCheckInInFlight } from './daily-check-in'
+import { registerImageUploadHandler } from './image-upload'
+
+registerImageUploadHandler()
 
 /**
  * 旧格式的 MemberTag 数据，用于迁移时的类型兼容。

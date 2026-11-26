@@ -312,10 +312,16 @@ export interface ReadingItem extends Pick<Topic, 'url' | 'title' | 'content'> {
   read?: boolean
 }
 
+export interface ImageUploadSettings {
+  provider: 'imgbb' | 'imgur'
+  imgbbApiKey?: string
+}
+
 export interface StorageItems {
   [StorageKey.SyncInfo]?: SettingsSyncInfo
   [StorageKey.Options]?: Options
   [StorageKey.API]?: API_Info
+  [StorageKey.ImageUpload]?: ImageUploadSettings
   [StorageKey.Daily]?: DailyInfo
   [StorageKey.MemberTag]?: MemberTag
   [StorageKey.ReadingList]?: {

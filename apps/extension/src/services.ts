@@ -4,6 +4,7 @@ import {
   StorageKey,
   V2EX,
 } from './constants'
+import { uploadImageViaBackground } from './image-upload-client'
 import {
   refreshOnceFromPage,
   runOnceTask,
@@ -30,6 +31,7 @@ import {
   createApiErrorFromResponse,
   getStorage,
   isAbortError,
+  isBrowserExtension,
   parseBlockUrl,
   parseIgnoreTopicUrl,
   setStorage,
@@ -169,6 +171,9 @@ export function deleteNotification(notification_id: string) {
  * 使用详情参考 https://help.imgur.com/hc/en-us/articles/26511665959579-What-files-can-I-upload-Is-there-a-size-limit。
  */
 export async function uploadImage(file: File): Promise<string> {
+  if (isBrowserExtension()) {
+    return uploadImageViaBackground(file)
+  }
   // 如果要测试上传图片的交互效果，则取消以下注释。
   // return new Promise((resolve) => {
   //   setTimeout(() => {

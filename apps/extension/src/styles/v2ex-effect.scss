@@ -1345,6 +1345,16 @@ a.v2p-topic-preview-title-link {
     .v2p-reply-upload-bar-disabled {
       pointer-events: none;
     }
+
+    .v2p-image-host-settings {
+      cursor: pointer;
+      margin-left: 12px;
+      padding: 0;
+      border: 0;
+      font: inherit;
+      color: var(--v2p-color-accent-400);
+      background: none;
+    }
   }
 }
 

@@ -1,5 +1,8 @@
 # V2EX Polish - 体验更现代化的 V2EX
 
+> 此仓库是 [coolpace/V2EX_Polish](https://github.com/coolpace/V2EX_Polish) 的个人 Fork，增加 **ImgBB / Imgur 图床切换**，保留上游 Git 历史。
+> 修改版 Chrome 安装包见 [Releases](https://github.com/duhbbx/V2EX_Polish/releases)。安装、API Key 设置和上游合并方法见 [图床功能说明](docs/image-hosts.md)。下面的应用商店链接指向上游原版，不包含此 Fork 的新增功能。
+
 ![V2EX Polish 宣传封面图](https://cdn.jsdelivr.net/gh/Codennnn/static/preview/V2EX_Polish.jpg)
 
 一款专为 V2EX 用户设计的轻量浏览器插件，提供了丰富的扩展功能，让原生页面焕然一新！✨

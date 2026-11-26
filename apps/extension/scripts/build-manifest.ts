@@ -326,7 +326,7 @@ const generateManifest = (): Manifest => {
   return {
     manifest_version: 3,
 
-    name: 'V2EX Polish',
+    name: 'V2EX Polish · ImgBB',
 
     version: getPackageVersion(),
 
@@ -336,7 +336,7 @@ const generateManifest = (): Manifest => {
     permissions: ['scripting', 'contextMenus', 'storage', 'alarms', 'sidePanel'],
 
     // 允许访问的主机权限（所有 V2EX 域名）
-    host_permissions: matches,
+    host_permissions: [...matches, 'https://api.imgbb.com/*', 'https://api.imgur.com/*'],
 
     // 扩展图标配置（多尺寸适配）
     icons: {

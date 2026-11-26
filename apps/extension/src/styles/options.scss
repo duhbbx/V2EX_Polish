@@ -743,6 +743,53 @@ fieldset {
   }
 }
 
+#image-host-form {
+  max-width: 760px;
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .form-item {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  input,
+  select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 480px;
+    padding: 9px 12px;
+    border: 1px solid var(--v2p-color-border-darker);
+    border-radius: var(--v2p-button-radius);
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--v2p-color-font-secondary);
+  }
+
+  button {
+    cursor: pointer;
+    align-self: flex-start;
+    padding: 8px 16px;
+    border: 1px solid var(--v2p-color-border-darker);
+    border-radius: var(--v2p-button-radius);
+    background-color: var(--v2p-color-bg-input);
+  }
+
+  .submit-btn {
+    border-color: var(--v2p-color-accent-400);
+    font-weight: 600;
+  }
+}
+
 #token-form {
   @at-root {
     .token-form-inner {

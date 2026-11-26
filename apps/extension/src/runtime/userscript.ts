@@ -12,6 +12,7 @@ const STORAGE_AREA_KEYS: Record<StorageArea, Array<keyof StorageItems>> = {
   ],
   local: [
     StorageKey.API,
+    StorageKey.ImageUpload,
     StorageKey.Daily,
     StorageKey.MemberTag,
   ],

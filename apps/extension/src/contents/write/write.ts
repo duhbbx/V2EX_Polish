@@ -5,7 +5,7 @@ export function handleWrite() {
   bindImageUpload({
     $wrapper: $('#workspace'),
     insertText: (text: string) => {
-      postTask(`editor.getDoc().replaceRange("${text}", editor.getCursor())`)
+      postTask(`editor.getDoc().replaceRange(${JSON.stringify(text)}, editor.getCursor())`)
     },
     replaceText: (find: string, replace: string) => {
       if (replace) {
@@ -18,7 +18,7 @@ export function handleWrite() {
       }
 
       postTask(`
-      editor.setValue(editor.getValue().replace("${find}", "${replace}"));
+      editor.setValue(editor.getValue().replace(${JSON.stringify(find)}, ${JSON.stringify(replace)}));
       const doc = editor.getDoc(); 
       const lastLine = doc.lastLine(); 
       const lastChar = doc.getLine(lastLine).length; 

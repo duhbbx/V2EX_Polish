@@ -18,6 +18,7 @@ import { initTheme, renderIcons, setFont, setMemberTags } from '../contents/help
 import type { FontType, Options, ThemeType } from '../types'
 import { escapeHTML, getStorage, setStorage } from '../utils'
 import { handleBackupForm, handleTokenForm } from './options.helper'
+import { initImageHostOptions } from './options.images'
 import { initTopicFilterOptions, readTopicFilterOptions } from './options.topic-filter'
 
 function loadIcons(root?: IconRoot) {
@@ -230,7 +231,7 @@ void (async function init() {
     $('#font-type-select').val(fontType)
     setFont(fontType)
 
-    $('input[type]').not('[data-content-key="filter"] input').on('change', () => {
+    $('input[type]').not('[data-content-key="filter"] input, [data-content-key="images"] input').on('change', () => {
       void saveOptions()
     })
 
@@ -498,6 +499,7 @@ void (async function init() {
   }
 
   void handleTokenForm()
+  void initImageHostOptions()
   void handleBackupForm()
 
   // 控制切换显示菜单的内容。

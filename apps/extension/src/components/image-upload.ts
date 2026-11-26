@@ -1,3 +1,4 @@
+import { getRuntime } from '../runtime'
 import { uploadImage } from '../services'
 
 interface ImageUploadProps {
@@ -18,24 +19,42 @@ interface ImageUploadControl {
 export function bindImageUpload(props: ImageUploadProps): ImageUploadControl {
   const { $wrapper, $input, insertText, replaceText } = props
 
-  const $uploadBar = $(`<div class="v2p-reply-upload-bar">${uploadTip}</div>`)
+  const $uploadBar = $('<div class="v2p-reply-upload-bar"></div>')
+  const $status = $('<span></span>').text(uploadTip).appendTo($uploadBar)
+  let uploading = false
+
+  if (getRuntime().isBrowserExtension) {
+    $('<button type="button" class="v2p-image-host-settings">图床设置</button>')
+      .on('click', (event) => {
+        event.stopPropagation()
+        getRuntime().ui.openOptions('images')
+      })
+      .appendTo($uploadBar)
+  }
 
   const handleUploadImage = (file: File) => {
-    const placeholder = '[上传图片中...]'
+    if (uploading) {
+      return
+    }
+
+    uploading = true
+    const placeholder = `[上传图片中-${Date.now()}]`
     insertText(` ${placeholder} `)
-    $uploadBar.addClass('v2p-reply-upload-bar-disabled').text('正在上传图片...')
+    $uploadBar.addClass('v2p-reply-upload-bar-disabled')
+    $status.text('正在上传图片...')
 
     uploadImage(file)
       .then((imgLink) => {
         replaceText(placeholder, imgLink)
       })
-      .catch(() => {
+      .catch((error: unknown) => {
         replaceText(placeholder, '')
-
-        window.alert('❌ 上传图片失败，请打开控制台查看原因')
+        window.alert(error instanceof Error ? error.message : '图片上传失败，请稍后重试。')
       })
       .finally(() => {
-        $uploadBar.removeClass('v2p-reply-upload-bar-disabled').text(uploadTip)
+        uploading = false
+        $uploadBar.removeClass('v2p-reply-upload-bar-disabled')
+        $status.text(uploadTip)
       })
   }
 
@@ -80,8 +99,16 @@ export function bindImageUpload(props: ImageUploadProps): ImageUploadControl {
       const file = imageItem.getAsFile()
 
       if (file) {
+        ev.preventDefault()
+        ev.stopImmediatePropagation()
         handleUploadImage(file)
       }
+    }
+  }, true)
+
+  $wrapper.get(0)?.addEventListener('dragover', (event) => {
+    if (event.dataTransfer?.types.includes('Files')) {
+      event.preventDefault()
     }
   })
 
@@ -95,9 +122,10 @@ export function bindImageUpload(props: ImageUploadProps): ImageUploadControl {
     const file = ev.dataTransfer?.files[0]
 
     if (file) {
+      ev.stopImmediatePropagation()
       handleUploadImage(file)
     }
-  })
+  }, true)
 
   $('.flex-one-row:last-of-type > .gray').text('')
 

@@ -47,6 +47,7 @@ export function prepareBackupData(storage: StorageSettings): StorageSettings {
   const {
     [StorageKey.API]: _api,
     [StorageKey.Daily]: _daily,
+    [StorageKey.ImageUpload]: _imageUpload,
     ...backupData
   } = storage
 
@@ -84,6 +85,7 @@ export async function applyRemoteSettings(
     [StorageKey.MemberTag]: _mt,
     [StorageKey.API]: _api,
     [StorageKey.Daily]: _daily,
+    [StorageKey.ImageUpload]: _imageUpload,
     ...syncableRemoteSettings
   } = remoteSettings
 
@@ -102,6 +104,7 @@ export async function applyRemoteSettings(
   const currentSyncData = await runtime.storage.get('sync')
   const {
     [StorageKey.MemberTag]: _currentMt, // 排除 MemberTag 残留
+    [StorageKey.ImageUpload]: _currentImageUpload,
     ...currentSyncOnly
   } = currentSyncData
 
