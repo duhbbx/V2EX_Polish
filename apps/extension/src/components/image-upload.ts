@@ -86,23 +86,15 @@ export function bindImageUpload(props: ImageUploadProps): ImageUploadControl {
       return
     }
 
-    const items = ev.clipboardData?.items
-
-    if (!items) {
-      return
-    }
-
     // 查找属于图像类型的数据项。
-    const imageItem = Array.from(items).find((item) => item.type.includes('image'))
+    const imageItem = Array.from(ev.clipboardData?.items ?? []).find((item) => item.type.startsWith('image/'))
+    const file = imageItem?.getAsFile()
+      ?? Array.from(ev.clipboardData?.files ?? []).find((item) => item.type.startsWith('image/'))
 
-    if (imageItem) {
-      const file = imageItem.getAsFile()
-
-      if (file) {
-        ev.preventDefault()
-        ev.stopImmediatePropagation()
-        handleUploadImage(file)
-      }
+    if (file) {
+      ev.preventDefault()
+      ev.stopImmediatePropagation()
+      handleUploadImage(file)
     }
   }, true)
 

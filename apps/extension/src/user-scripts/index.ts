@@ -1,6 +1,7 @@
 import jQuery from 'jquery'
 import { patternToRegex } from 'webext-patterns'
 
+import { getWritePageMatches } from '../../shared/write-page'
 import { V2EX_DOMAINS } from '../constants'
 import { markBootState } from '../contents/boot-markers'
 import { setRuntime } from '../runtime'
@@ -39,7 +40,7 @@ const allowedHosts = V2EX_DOMAINS.map((domain) => `https://${domain}`)
 
 const commonRegex = patternToRegex(...allowedHosts.map((host) => `${host}/*`))
 const topicRegex = patternToRegex(...allowedHosts.map((host) => `${host}/t/*`))
-const writeRegex = patternToRegex(...allowedHosts.map((host) => `${host}/write*`))
+const writeRegex = patternToRegex(...getWritePageMatches(V2EX_DOMAINS))
 const memberRegex = patternToRegex(...allowedHosts.map((host) => `${host}/member/*`))
 const settingsRegex = patternToRegex(...allowedHosts.map((host) => `${host}/settings*`))
 const notificationsRegex = patternToRegex(...allowedHosts.map((host) => `${host}/notifications*`))
@@ -60,6 +61,7 @@ function isHomePage(url: string): boolean {
     || path.startsWith('/notes/')
     || path.startsWith('/settings')
     || path.startsWith('/write')
+    || path === '/new' || path.startsWith('/new/')
     || path.startsWith('/member/')
     || path.startsWith('/mission/daily')
     || path.startsWith('/notifications')

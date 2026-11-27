@@ -37,6 +37,7 @@ import { consola } from 'consola'
 
 import { contentScriptGroups, type ContentScriptTarget } from '../shared/features'
 import { V2EX_DOMAINS } from '../shared/v2ex-domains'
+import { getWritePageMatches } from '../shared/write-page'
 import {
   EXTENSION_TARGETS,
   type ExtensionTarget,
@@ -279,7 +280,7 @@ const generateManifest = (): Manifest => {
         return getMatches('t')
 
       case 'write':
-        return getMatches('write', true)
+        return getWritePageMatches(HOSTS)
 
       case 'member':
         return getMatches('member')
